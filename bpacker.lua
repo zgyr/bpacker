@@ -4,7 +4,7 @@ local shell = require('shell')
 local eeprom = component.eeprom
 
 local function usage()
-  print('Usage: compress [options] <filename>' .. [[
+  print('Usage: bpacker [options] <filename>' .. [[
   
 Options:
   -q           quiet mode, don't ask questions
