@@ -5,25 +5,32 @@ A program for compressing and flashing files to EEPROM.
 
 ## Download
 
-'''
+```
 pastebin run KThbTuZr
-'''
+```
+
 or
-'''
+
+```
 wget https://raw.githubusercontent.com/zgyr/bpacker/master/installer.lua
+
 installer && rm installer.lua
-'''
+```
 
 
 ## Usage
-'''
+```
 bpacker [options] <filename>
 
+
 Options:
+
   -q           quiet mode, don't ask questions
+  
   -m           minify code before compressing (unsafe)
+  
   -h, --help   display this help and exit
-'''
+```
 
 
 ## TODO
