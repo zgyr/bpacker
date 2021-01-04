@@ -3,6 +3,13 @@
 A program for compressing and flashing files to EEPROM.
 
 
+## Requirements
+
+* Data Card any tier
+
+* Internet Card required for installation
+
+
 ## Download
 
 ```
