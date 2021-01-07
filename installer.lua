@@ -1,3 +1,5 @@
 os.execute('mkdir /usr/bin')
+os.execute('mkdir /usr/lib')
+os.execute('wget https://raw.githubusercontent.com/BrightYC/Other/master/lzss.lua /usr/lib/lzss.lua')
 os.execute('wget https://raw.githubusercontent.com/zgyr/bpacker/master/bpacker.lua /usr/bin/bpacker.lua')
 os.execute('wget https://raw.githubusercontent.com/stravant/lua-minify/master/minify.lua /usr/bin/minify.lua')

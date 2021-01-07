@@ -36,6 +36,8 @@ Options:
   
   -m           minify code before compressing (unsafe)
   
+  -l, --lzss   use lzss algorithm for compression (no data card required)
+  
   -h, --help   display this help and exit
 ```
 
@@ -43,5 +45,5 @@ Options:
 ## TODO
 
 - [ ] Make a more cleverly packer
-- [ ] Add lz4 or lzss algorithm
+- [x] Add lz4 or lzss algorithm
 - [ ] Improve the minifier

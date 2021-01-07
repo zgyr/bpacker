@@ -9,6 +9,7 @@ local function usage()
 Options:
   -q           quiet mode, don't ask questions
   -m           minify code before compressing (unsafe)
+  -l, --lzss   use lzss algorithm for compression (no data card required)
   -h, --help   display this help and exit]])
 end
 
@@ -24,7 +25,12 @@ local function flash(str)
     print('Flashing EEPROM ' ..  eeprom.address)
     print('Please do NOT power down or restart your computer during this operation!')
   end
-  eeprom.set(str)
+  if #str < 4096 then
+    eeprom.set(str)
+  else
+    io.stderr:write('This file cannot compress to 4KiB\n')
+    return
+  end
   if not options.q then
     print('All done! You can remove the EEPROM and re-insert the previous one now.')
   end
@@ -43,11 +49,16 @@ local function deflate(str)
     return
   end
   result = decoder .. result .. ']==]'
-  if #result < 4096 then
-    flash(result)
-  else
-    io.stderr:write('This file cannot compress to 4KiB\n')
+  flash(result)
+end
+
+local function lzss(str)
+  local lzss_ = require('lzss')
+  local result = lzss_.getSXF(lzss_.compress(str))
+  if #result >= #str and not options.q then
+    print('Size of the compressed data is larger than the original.')
   end
+  flash(result)
 end
 
 local filename = shell.resolve(args[1])
@@ -69,5 +80,9 @@ if options.m then
 end
 
 local f = io.open(filename)
-deflate(f:read('*a'))
+if options.lzss or options.l then
+  lzss(f:read('*a'))
+else
+  deflate(f:read('*a'))
+end
 f:close()
