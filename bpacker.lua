@@ -1,4 +1,5 @@
 local component = require('component')
+local computer = require('computer')
 local fs = require('filesystem')
 local shell = require('shell')
 local eeprom = component.eeprom
@@ -53,6 +54,10 @@ local function deflate(str)
 end
 
 local function lzss(str)
+  if computer.getArchitecture() ~= 'Lua 5.3' then
+    io.stderr:write('This program requires Lua 5.3')
+    return
+  end
   local lzss_ = require('lzss')
   local result = lzss_.getSXF(lzss_.compress(str))
   if #result >= #str and not options.q then
